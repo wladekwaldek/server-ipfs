@@ -4,9 +4,9 @@ const http = require("http");
 
 const app = express();
 
-app.use("/", express.static(path.join(__dirname, "build")));
+app.use("/", express.static(path.join(__dirname, "client")));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "index.html"));
 });
 
 async function start() {
