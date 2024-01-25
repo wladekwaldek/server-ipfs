@@ -4,9 +4,12 @@ const http = require("http");
 
 const app = express();
 
+const router = express.Router();
+
 app.use(express.static(path.join(__dirname, "client", "build")));
-app.get("/list", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+
+router.get("/list", (req, res) => {
+  res.send("fcuckikaki");
 });
 
 app.get("*", (req, res) => {
