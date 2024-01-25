@@ -11,6 +11,15 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.use((req, res, next) => {
+  res.redirect("/");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Что-то пошло не так!");
+});
+
 async function start() {
   try {
     app.listen(5000, () => {

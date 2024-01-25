@@ -20,10 +20,6 @@ export default function Form() {
     }
   };
 
-  // const reload = () => {
-  //   fetch(baseUrl);
-  // };
-
   useEffect(() => {
     webApp.ready();
     if (webApp.initData) {

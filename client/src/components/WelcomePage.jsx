@@ -27,12 +27,6 @@ const WelcomePage = () => {
     auth.login(values, user_id);
   };
 
-  const getApiKey = async () => {
-    const data = await fetch("/api/example");
-    const response = await data.text();
-    console.log(response);
-  };
-
   useEffect(() => {
     webApp.ready();
     if (webApp.initData) {
@@ -40,8 +34,6 @@ const WelcomePage = () => {
       setFirst_name(webApp.initDataUnsafe?.user?.first_name);
       setUser_id(webApp.initDataUnsafe?.user?.id.toString());
       setUser_from_storage(localStorage.getItem(user_id));
-    } else {
-      getApiKey();
     }
   }, [user_id]);
 
@@ -52,7 +44,6 @@ const WelcomePage = () => {
   if (!webApp.initData) {
     return (
       <div>
-        {/* <h1>{apiKey}</h1> */}
         <span
           style={{
             color: "white",

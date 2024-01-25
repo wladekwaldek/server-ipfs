@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import List from "./List";
 import Form from "./Form";
-import NoFound from "./NoFound";
+import NotFound from "./NoFound";
 
 export default function Navigation() {
   const auth = useContext(AuthContext);
@@ -20,7 +20,7 @@ export default function Navigation() {
         path="/form"
         element={auth.isAuthenticated ? <Form /> : <WelcomePage />}
       />
-      <Route element={<NoFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
