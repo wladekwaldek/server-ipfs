@@ -12,7 +12,7 @@ if (NODE_ENV === "production") {
 }
 
 app.use(function (req, res, next) {
-  res.redirect("/");
+  res.status(404).send("fuck");
 });
 
 async function start() {
