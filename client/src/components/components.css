@@ -1,0 +1,95 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-back {
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 15px;
+  color: white;
+  background-color: inherit;
+}
+
+.field {
+  border: none; /* Убираем стандартную границу */
+  border-bottom: 2px solid black; /* Создаем черную полоску снизу */
+  width: 60px;
+  padding: 3px;
+  outline: none;
+  background-color: inherit;
+  margin: 50px 0;
+  color: white;
+  font-size: 18px;
+}
+
+.element {
+  width: 80%;
+  background-color: aliceblue;
+  color: grey;
+  margin: 20px 0;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 10px;
+  position: relative;
+}
+
+.input {
+  border: none; /* Убираем стандартную границу */
+  width: 90%;
+  outline: none;
+  background-color: inherit;
+  color: white;
+  font-size: 20px;
+}
+
+.input-wrap {
+  border-bottom: 2px solid black;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.input-container {
+  width: 90%;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+
+.ad_button {
+  height: 10%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid black;
+}
+
+.ad_button:hover {
+  cursor: pointer;
+}
+
+.list_container {
+  height: 80%;
+  overflow: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
