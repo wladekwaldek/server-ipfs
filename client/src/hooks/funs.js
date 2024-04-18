@@ -65,7 +65,7 @@ export function loadFile() {
 
     // Запускаем скачивание файла
     a.click();
-
+    alert("ok");
     // Удаляем ссылку из DOM
     document.body.removeChild(a);
   } else {
