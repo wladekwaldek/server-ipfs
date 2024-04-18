@@ -3,15 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./components.css";
 import ListElement from "./ListElement";
 
-const webApp = window.Telegram.WebApp;
-
 export default function List() {
   const [list, setList] = useState([]);
   const [fields, setFields] = useState([]);
   const title = useLocation();
   const navigation = useNavigate();
-  const searchParams = new URLSearchParams(title?.search);
-  const query = searchParams.get("query");
 
   const goToForm = () => {
     navigation("/form", { state: { category: title.state?.category } });
@@ -31,34 +27,18 @@ export default function List() {
   };
 
   const toBack = (title) => {
-    if (title === "/list") {
-      navigation("/");
-    } else {
-      alert(title);
-    }
+    navigation("/");
   };
 
   useEffect(() => {
-    webApp.ready();
-    if (webApp.initData) {
-      webApp.BackButton.isVisible = true;
-      webApp.BackButton.onClick(() => toBack(title.pathname));
-      const listFromLocal = JSON.parse(
-        localStorage.getItem(title.state?.category)
-      );
-      if (listFromLocal) {
-        setList(listFromLocal.data);
-        setFields(listFromLocal.fields);
-      }
-      if (query) {
-        const item = list.filter((i) => i.title === query);
-        setList(item);
-      }
-      console.log(title.state?.category);
-    } else {
-      navigation("/");
+    const listFromLocal = JSON.parse(
+      localStorage.getItem(title.state?.category)
+    );
+    if (listFromLocal) {
+      setList(listFromLocal.data);
+      setFields(listFromLocal.fields);
     }
-  }, [title.state?.category, query]);
+  }, [title.state?.category]);
 
   return (
     <>
@@ -107,7 +87,11 @@ export default function List() {
             <div>Ваш список пока пуст.</div>
           </>
         )}
+        <div onClick={toBack}>
+          <i className="fa fa-arrow-left" />
+        </div>
       </div>
+
       <div className="ad_button" onClick={goToForm}>
         Добавить
       </div>

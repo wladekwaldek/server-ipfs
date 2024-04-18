@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./components.css";
 
-const webApp = window.Telegram.WebApp;
-
 export default function Form() {
   const [form, setForm] = useState({});
   const [fields, setFields] = useState([]);
@@ -11,87 +9,74 @@ export default function Form() {
   const title = useLocation();
   const navigation = useNavigate();
 
-  const toBack = (title, state) => {
-    if (title === "/form") {
-      console.log(state);
-      navigation("/list", state);
-    } else {
-      alert(title);
-    }
+  const toBack = () => {
+    navigation("/list", { state: { category: title.state.category } });
   };
 
   useEffect(() => {
-    webApp.ready();
-    if (webApp.initData) {
-      webApp.BackButton.onClick(() =>
-        toBack(title.pathname, { state: { category: title.state?.category } })
-      );
-      const listFromLocal = JSON.parse(
-        localStorage.getItem(title.state?.category)
-      );
+    const listFromLocal = JSON.parse(
+      localStorage.getItem(title.state?.category)
+    );
 
-      if (listFromLocal) setList(listFromLocal.data);
-      switch (title.state?.category) {
-        case "email":
-          setFields([
-            { id: "title", fieldTitle: "Название: " },
-            { id: "email", fieldTitle: "Эл. почта: " },
-            { id: "password", fieldTitle: "Пароль: " },
-            { id: "notes", fieldTitle: "Заметки: " },
-          ]);
-          setForm({
-            title: title.state?.el?.title || "",
-            email: title.state?.el?.email || "",
-            password: title.state?.el?.password || "",
-            notes: title.state?.el?.notes || "",
-          });
-          break;
-        case "sites":
-          setFields([
-            { id: "title", fieldTitle: "Название: " },
-            { id: "link", fieldTitle: "Веб-ссылка: " },
-            { id: "login", fieldTitle: "Логин: " },
-            { id: "email", fieldTitle: "Эл. почта: " },
-            { id: "password", fieldTitle: "Пароль: " },
-            { id: "notes", fieldTitle: "Заметки: " },
-          ]);
-          setForm({
-            title: title.state?.el?.title || "",
-            link: title.state?.el?.link || "",
-            login: title.state?.el?.login || "",
-            email: title.state?.el?.email || "",
-            password: title.state?.el?.password || "",
-            notes: title.state?.el?.notes || "",
-          });
-          break;
-        case "networks":
-          setFields([
-            { id: "title", fieldTitle: "Название: " },
-            { id: "login", fieldTitle: "Логин: " },
-            { id: "email", fieldTitle: "Эл. почта: " },
-            { id: "password", fieldTitle: "Пароль: " },
-            { id: "notes", fieldTitle: "Заметки: " },
-          ]);
-          setForm({
-            title: title.state?.el?.title || "",
-            login: title.state?.el?.login || "",
-            email: title.state?.el?.email || "",
-            password: title.state?.el?.password || "",
-            notes: title.state?.el?.notes || "",
-          });
-          break;
-        default:
-          setFields([
-            { id: "title", fieldTitle: "Название: " },
-            { id: "notes", fieldTitle: "Заметки: " },
-          ]);
-          setForm({
-            title: title.state?.el?.title || "",
-            notes: title.state?.el?.notes || "",
-          });
-      }
-    } else {
-      navigation("/");
+    if (listFromLocal) setList(listFromLocal.data);
+    switch (title.state?.category) {
+      case "email":
+        setFields([
+          { id: "title", fieldTitle: "Название: " },
+          { id: "email", fieldTitle: "Эл. почта: " },
+          { id: "password", fieldTitle: "Пароль: " },
+          { id: "notes", fieldTitle: "Заметки: " },
+        ]);
+        setForm({
+          title: title.state?.el?.title || "",
+          email: title.state?.el?.email || "",
+          password: title.state?.el?.password || "",
+          notes: title.state?.el?.notes || "",
+        });
+        break;
+      case "sites":
+        setFields([
+          { id: "title", fieldTitle: "Название: " },
+          { id: "link", fieldTitle: "Веб-ссылка: " },
+          { id: "login", fieldTitle: "Логин: " },
+          { id: "email", fieldTitle: "Эл. почта: " },
+          { id: "password", fieldTitle: "Пароль: " },
+          { id: "notes", fieldTitle: "Заметки: " },
+        ]);
+        setForm({
+          title: title.state?.el?.title || "",
+          link: title.state?.el?.link || "",
+          login: title.state?.el?.login || "",
+          email: title.state?.el?.email || "",
+          password: title.state?.el?.password || "",
+          notes: title.state?.el?.notes || "",
+        });
+        break;
+      case "networks":
+        setFields([
+          { id: "title", fieldTitle: "Название: " },
+          { id: "login", fieldTitle: "Логин: " },
+          { id: "email", fieldTitle: "Эл. почта: " },
+          { id: "password", fieldTitle: "Пароль: " },
+          { id: "notes", fieldTitle: "Заметки: " },
+        ]);
+        setForm({
+          title: title.state?.el?.title || "",
+          login: title.state?.el?.login || "",
+          email: title.state?.el?.email || "",
+          password: title.state?.el?.password || "",
+          notes: title.state?.el?.notes || "",
+        });
+        break;
+      default:
+        setFields([
+          { id: "title", fieldTitle: "Название: " },
+          { id: "notes", fieldTitle: "Заметки: " },
+        ]);
+        setForm({
+          title: title.state?.el?.title || "",
+          notes: title.state?.el?.notes || "",
+        });
     }
   }, [title.state.category, title.state.el]);
 
@@ -179,6 +164,9 @@ export default function Form() {
         >
           Готово
         </button>
+        <div onClick={toBack}>
+          <i className="fa fa-arrow-left" />
+        </div>
       </div>
     </>
   );

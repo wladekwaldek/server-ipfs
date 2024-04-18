@@ -15,7 +15,7 @@ export default function Navigation() {
         path="/"
         element={auth.isAuthenticated ? <MainPage /> : <WelcomePage />}
       />
-      <Route path="/list/:param?" element={<List />} />
+      <Route path="/list" element={<List />} />
       <Route
         path="/form"
         element={auth.isAuthenticated ? <Form /> : <WelcomePage />}

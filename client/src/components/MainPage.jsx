@@ -1,16 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { encrypt, loadFile } from "../hooks/funs";
 import "./components.css";
-import { useEffect } from "react";
-
-const webApp = window.Telegram.WebApp;
 
 const MainPage = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (webApp.initData) {
-      webApp.BackButton.isVisible = false;
-    }
-  }, []);
+
   return (
     <>
       <button
@@ -36,6 +30,9 @@ const MainPage = () => {
         onClick={() => navigate("/list", { state: { category: "other" } })}
       >
         Другое
+      </button>
+      <button className="element" onClick={loadFile}>
+        Back Up
       </button>
     </>
   );
